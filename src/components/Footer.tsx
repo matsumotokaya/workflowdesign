@@ -1,6 +1,10 @@
+"use client";
+
 import { profile } from "@/data/profile";
+import { useLanguage } from "@/lib/language";
 
 export default function Footer() {
+  const { tx } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -11,18 +15,26 @@ export default function Footer() {
         </p>
         <div className="flex items-center gap-8">
           <a
-            href={profile.social.instagram}
+            href={`mailto:${profile.email}`}
+            className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
+          >
+            {tx("labelEmail")}
+          </a>
+          <a
+            href={profile.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
           >
-            Instagram
+            {tx("labelFacebook")}
           </a>
           <a
-            href={`mailto:${profile.email}`}
+            href={profile.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
           >
-            Email
+            {tx("labelLinkedin")}
           </a>
         </div>
       </div>

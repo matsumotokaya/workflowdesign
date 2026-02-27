@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { projects, Project } from "@/data/profile";
+import { useLanguage } from "@/lib/language";
 import ScrollReveal from "./ScrollReveal";
 
 function ProjectCard({
@@ -20,6 +21,7 @@ function ProjectCard({
   onHover: () => void;
   onLeave: () => void;
 }) {
+  const { t, tx } = useLanguage();
   const hasDetail = !!project.detailImages?.length;
 
   const content = (
@@ -30,7 +32,7 @@ function ProjectCard({
       >
         <Image
           src={project.thumbnail}
-          alt={project.title.ja}
+          alt={t(project.title)}
           fill
           className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
           sizes={
@@ -59,7 +61,7 @@ function ProjectCard({
             }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span>View Project</span>
+            <span>{tx("viewProject")}</span>
             <svg
               width="14"
               height="14"
@@ -83,10 +85,10 @@ function ProjectCard({
       <div className="mt-4 flex items-start justify-between gap-4">
         <div>
           <h3 className="text-[15px] font-medium tracking-[-0.01em]">
-            {project.title.ja}
+            {t(project.title)}
           </h3>
           <p className="mt-1 text-[13px] text-muted">
-            {project.category.ja}
+            {t(project.category)}
           </p>
         </div>
         <span className="mt-0.5 text-[12px] text-muted tabular-nums">
@@ -114,6 +116,7 @@ function ProjectCard({
 }
 
 export default function Work() {
+  const { tx } = useLanguage();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
@@ -122,10 +125,10 @@ export default function Work() {
         {/* Section Header */}
         <ScrollReveal className="mb-16 md:mb-24">
           <p className="mb-3 text-[12px] tracking-[0.1em] text-muted uppercase">
-            Selected Work
+            {tx("selectedWork")}
           </p>
           <h2 className="text-[clamp(28px,4vw,48px)] font-light tracking-[-0.02em]">
-            プロジェクト
+            {tx("projects")}
           </h2>
         </ScrollReveal>
 

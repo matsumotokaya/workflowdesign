@@ -9,12 +9,12 @@ export const profile = {
   },
   studio: "Workflow Design",
   bio: {
-    ja: "上智大学哲学科在学中にデザイン事務所 WORKFLOW DESIGN を設立。大手広告代理店やレコード会社との提携を経て、スタートアップ・メガベンチャーでデザインとフロントエンド開発を手掛ける。",
-    en: "Founded design studio WORKFLOW DESIGN while studying philosophy at Sophia University. After partnerships with major advertising agencies and record labels, now specializes in design and front-end development for startups and tech companies.",
+    ja: "上智大学哲学科在学中にデザイン事務所 WORKFLOW DESIGN を設立。大手広告代理店との提携を経て、スタートアップ・メガベンチャーでデザインやアートディレクション、WEBフロントエンド開発を手掛ける。",
+    en: "Founded design studio WORKFLOW DESIGN while studying philosophy at Sophia University. After partnerships with major advertising agencies, now specializes in design, art direction, and web front-end development for startups and tech companies.",
   },
   location: {
-    ja: "東京",
-    en: "Tokyo",
+    ja: "横浜市",
+    en: "Yokohama",
   },
   education: {
     ja: "上智大学 哲学専攻",
@@ -25,10 +25,10 @@ export const profile = {
     en: "From Mie, Japan",
   },
   social: {
-    instagram: "https://instagram.com/whatif.ep",
-    instagramHandle: "@whatif.ep",
+    facebook: "https://www.facebook.com/kaya.matsumoto",
+    linkedin: "https://www.linkedin.com/in/kaya-matsumoto-8546481ab/",
   },
-  email: "hello@workflowdesign.net",
+  email: "matsumotokaya@gmail.com",
 };
 
 export type Project = {
@@ -61,6 +61,32 @@ export const projects: Project[] = [
     ),
   },
   {
+    id: "wealthpark-branding",
+    title: { ja: "WealthPark ブランディング", en: "WealthPark Branding" },
+    category: { ja: "ブランディング / ウェブデザイン", en: "Branding / Web Design" },
+    description: {
+      ja: "不動産テック企業WealthParkのコーポレートサイトリニューアルおよびブランディング。プロダクトの世界観を伝えるキービジュアル、UI設計、モーション演出を含む包括的なデザイン。",
+      en: "Corporate website redesign and branding for WealthPark, a real estate tech company. Comprehensive design including key visuals, UI design, and motion graphics.",
+    },
+    thumbnail: "/works/wealthpark-branding/thumbnail.jpg",
+    year: "2022",
+    client: "WealthPark Inc.",
+    role: { ja: "ブランディング / ウェブデザイン", en: "Branding / Web Design" },
+    detailImages: [
+      "/works/wealthpark-branding/001.jpg",
+      "/works/wealthpark-branding/002.gif",
+      "/works/wealthpark-branding/003.jpg",
+      "/works/wealthpark-branding/new004.png",
+      "/works/wealthpark-branding/004.jpg",
+      "/works/wealthpark-branding/005.jpg",
+      "/works/wealthpark-branding/006.png",
+      "/works/wealthpark-branding/007.jpg",
+      "/works/wealthpark-branding/008.jpg",
+      "/works/wealthpark-branding/009.mp4",
+      "/works/wealthpark-branding/010.mp4",
+    ],
+  },
+  {
     id: "wealthpark-factbook",
     title: { ja: "WealthPark Fact Book", en: "WealthPark Fact Book" },
     category: { ja: "プレゼンテーション / 資料デザイン", en: "Presentation / Document Design" },
@@ -74,6 +100,22 @@ export const projects: Project[] = [
     role: { ja: "資料デザイン / アートディレクション", en: "Document Design / Art Direction" },
     detailImages: Array.from({ length: 22 }, (_, i) =>
       `/works/wealthpark-factbook/${String(i + 1).padStart(3, "0")}.jpg`
+    ),
+  },
+  {
+    id: "cntl-branding",
+    title: { ja: "CNTL Lab ブランディング", en: "CNTL Lab Branding" },
+    category: { ja: "ブランディング / アイデンティティ", en: "Branding / Identity" },
+    description: {
+      ja: "霞ヶ関の不動産デベロッパー中央日本土地建物のDX推進事業部として立ち上げられたラボのブランディング及びアイデンティティデザイン。",
+      en: "Branding and identity design for a DX innovation lab established by Central Nippon Land and Building, a real estate developer based in Kasumigaseki.",
+    },
+    thumbnail: "/works/cntl-branding/thumbnail@3x-80.jpg",
+    year: "2024",
+    client: "Central Nippon Land and Building",
+    role: { ja: "ブランディング / アイデンティティデザイン", en: "Branding / Identity Design" },
+    detailImages: Array.from({ length: 6 }, (_, i) =>
+      `/works/cntl-branding/${String(i + 1).padStart(3, "0")}@3x-80.jpg`
     ),
   },
   {
@@ -95,81 +137,21 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "digital-platform",
-    title: { ja: "デジタルプラットフォーム", en: "Digital Platform" },
-    category: { ja: "UI/UXデザイン", en: "UI/UX Design" },
+    id: "wealthpark-lab",
+    title: { ja: "WealthPark Lab シンボルデザイン", en: "WealthPark Lab Symbol Design" },
+    category: { ja: "ブランディング / シンボルデザイン", en: "Branding / Symbol Design" },
     description: {
-      ja: "プロダクトのインターフェースデザインとUX設計",
-      en: "Product interface design and UX architecture",
+      ja: "WealthPark Lab のブランディングおよびシンボルデザイン。コンセプト設計からロゴマーク、パターン、各種モックアップまでの包括的なビジュアルアイデンティティ。",
+      en: "Branding and symbol design for WealthPark Lab. Comprehensive visual identity from concept design to logo mark, patterns, and mockups.",
     },
-    thumbnail: "/002.png",
-    year: "2025",
-  },
-  {
-    id: "editorial",
-    title: { ja: "エディトリアルデザイン", en: "Editorial Design" },
-    category: { ja: "グラフィックデザイン", en: "Graphic Design" },
-    description: {
-      ja: "出版物のレイアウトとビジュアルデザイン",
-      en: "Publication layout and visual design",
-    },
-    thumbnail: "/003.jpg",
-    year: "2025",
-  },
-  {
-    id: "corporate-identity",
-    title: { ja: "コーポレートアイデンティティ", en: "Corporate Identity" },
-    category: { ja: "ブランド戦略", en: "Brand Strategy" },
-    description: {
-      ja: "企業のビジュアルアイデンティティ全体設計",
-      en: "Complete visual identity system design",
-    },
-    thumbnail: "/004.jpg",
-    year: "2024",
-  },
-  {
-    id: "web-experience",
-    title: { ja: "ウェブエクスペリエンス", en: "Web Experience" },
-    category: { ja: "ウェブデザイン", en: "Web Design" },
-    description: {
-      ja: "インタラクティブなウェブ体験の設計・開発",
-      en: "Interactive web experience design & development",
-    },
-    thumbnail: "/005.jpg",
-    year: "2024",
-  },
-  {
-    id: "whatif-ai",
-    title: { ja: "WHATIF - 生成AI", en: "WHATIF - Generative AI" },
-    category: { ja: "生成AI / ソーシャル", en: "Generative AI / Social" },
-    description: {
-      ja: "生成AIアカウント運営 — 12万フォロワー",
-      en: "Generative AI account — 120K followers",
-    },
-    thumbnail: "/006.jpg",
-    year: "2024",
-  },
-  {
-    id: "logo-design",
-    title: { ja: "ロゴデザイン", en: "Logo Design" },
-    category: { ja: "ブランディング", en: "Branding" },
-    description: {
-      ja: "企業・サービスのロゴマーク制作",
-      en: "Logo mark design for companies and services",
-    },
-    thumbnail: "/007.jpg",
+    thumbnail: "/works/wealthpark-lab/thumbnail.jpg",
     year: "2023",
-  },
-  {
-    id: "mobile-app",
-    title: { ja: "モバイルアプリ", en: "Mobile App" },
-    category: { ja: "アプリデザイン", en: "App Design" },
-    description: {
-      ja: "モバイルアプリケーションのUI/UXデザイン",
-      en: "Mobile application UI/UX design",
-    },
-    thumbnail: "/008.jpg",
-    year: "2023",
+    client: "WealthPark Inc.",
+    role: { ja: "ブランディング / シンボルデザイン", en: "Branding / Symbol Design" },
+    detailImages: Array.from({ length: 11 }, (_, i) => {
+      const ext = i === 3 ? "png" : i === 5 ? "jpeg" : "jpg";
+      return `/works/wealthpark-lab/${String(i + 1).padStart(3, "0")}.${ext}`;
+    }),
   },
 ];
 
@@ -185,8 +167,8 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   { company: "食べログ", role: { ja: "フロントエンドエンジニア", en: "Front-end Engineer" } },
-  { company: "キナリノ", role: { ja: "PdM", en: "Product Manager" } },
+  { company: "キナリノ（カカクコム）", role: { ja: "PdM", en: "Product Manager" } },
   { company: "WealthPark", role: { ja: "デザイナー", en: "Designer" } },
   { company: "MiSUMi", role: { ja: "アートディレクター", en: "Art Director" } },
-  { company: "CrowdBank", role: { ja: "デザイナー", en: "Designer" } },
+  { company: "Crowd Bank（日本クラウド証券）", role: { ja: "デザイナー", en: "Designer" } },
 ];

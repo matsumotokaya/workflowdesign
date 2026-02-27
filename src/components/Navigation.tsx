@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/lib/language";
 
 const navItems = [
   { label: "Work", href: "#work" },
@@ -10,10 +11,13 @@ const navItems = [
 ];
 
 export default function Navigation() {
+  const { lang, setLang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const toggleLang = () => setLang(lang === "en" ? "ja" : "en");
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
@@ -27,7 +31,6 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
@@ -68,7 +71,7 @@ export default function Navigation() {
             Workflow Design
           </a>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Links + Lang Toggle */}
           <div className="hidden items-center gap-12 md:flex">
             {navItems.map((item) => (
               <a
@@ -83,34 +86,48 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
+            <button
+              onClick={toggleLang}
+              className="text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
+            >
+              {lang === "en" ? "JA" : "EN"}
+            </button>
           </div>
 
-          {/* Hamburger - 2 lines */}
-          <button
-            className="relative z-[60] flex h-10 w-10 flex-col items-center justify-center gap-[7px] md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
-          >
-            <motion.span
-              className="block h-[1.5px] w-6 bg-current origin-center"
-              animate={
-                isOpen
-                  ? { rotate: 45, y: 4.25 }
-                  : { rotate: 0, y: 0 }
-              }
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            />
-            <motion.span
-              className="block h-[1.5px] w-6 bg-current origin-center"
-              animate={
-                isOpen
-                  ? { rotate: -45, y: -4.25 }
-                  : { rotate: 0, y: 0 }
-              }
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            />
-          </button>
+          {/* Mobile: Lang Toggle + Hamburger */}
+          <div className="relative z-[60] flex items-center gap-4 md:hidden">
+            <button
+              onClick={toggleLang}
+              className="text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
+            >
+              {lang === "en" ? "JA" : "EN"}
+            </button>
+            <button
+              className="flex h-10 w-10 flex-col items-center justify-center gap-[7px]"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+            >
+              <motion.span
+                className="block h-[1.5px] w-6 bg-current origin-center"
+                animate={
+                  isOpen
+                    ? { rotate: 45, y: 4.25 }
+                    : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              />
+              <motion.span
+                className="block h-[1.5px] w-6 bg-current origin-center"
+                animate={
+                  isOpen
+                    ? { rotate: -45, y: -4.25 }
+                    : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              />
+            </button>
+          </div>
         </div>
       </nav>
 

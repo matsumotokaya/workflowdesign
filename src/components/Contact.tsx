@@ -1,9 +1,12 @@
 "use client";
 
 import { profile } from "@/data/profile";
+import { useLanguage } from "@/lib/language";
 import ScrollReveal from "./ScrollReveal";
 
 export default function Contact() {
+  const { t, tx } = useLanguage();
+
   return (
     <section id="contact" className="border-t border-border px-6 py-32 md:px-12 md:py-40">
       <div className="mx-auto max-w-[1400px]">
@@ -11,14 +14,13 @@ export default function Contact() {
           {/* Left */}
           <ScrollReveal>
             <p className="mb-3 text-[12px] tracking-[0.1em] text-muted uppercase">
-              Contact
+              {tx("contact")}
             </p>
             <h2 className="mb-8 text-[clamp(28px,4vw,48px)] font-light tracking-[-0.02em]">
-              お仕事のご相談
+              {tx("contactHeading")}
             </h2>
             <p className="max-w-md text-[15px] leading-[1.8] text-muted">
-              ブランディング、UI/UXデザイン、ウェブ開発など、
-              プロジェクトについてお気軽にご連絡ください。
+              {tx("contactDescription")}
             </p>
           </ScrollReveal>
 
@@ -27,7 +29,7 @@ export default function Contact() {
             <div className="space-y-10">
               <div>
                 <h3 className="mb-3 text-[12px] tracking-[0.08em] text-muted uppercase">
-                  Email
+                  {tx("labelEmail")}
                 </h3>
                 <a
                   href={`mailto:${profile.email}`}
@@ -39,24 +41,38 @@ export default function Contact() {
 
               <div>
                 <h3 className="mb-3 text-[12px] tracking-[0.08em] text-muted uppercase">
-                  Instagram
+                  {tx("labelFacebook")}
                 </h3>
                 <a
-                  href={profile.social.instagram}
+                  href={profile.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-link-underline relative inline-block text-[18px] tracking-[-0.01em] md:text-[20px]"
                 >
-                  {profile.social.instagramHandle}
+                  Facebook
                 </a>
               </div>
 
               <div>
                 <h3 className="mb-3 text-[12px] tracking-[0.08em] text-muted uppercase">
-                  Location
+                  {tx("labelLinkedin")}
+                </h3>
+                <a
+                  href={profile.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link-underline relative inline-block text-[18px] tracking-[-0.01em] md:text-[20px]"
+                >
+                  LinkedIn
+                </a>
+              </div>
+
+              <div>
+                <h3 className="mb-3 text-[12px] tracking-[0.08em] text-muted uppercase">
+                  {tx("labelLocationContact")}
                 </h3>
                 <p className="text-[18px] tracking-[-0.01em] md:text-[20px]">
-                  {profile.location.ja}
+                  {t(profile.location)}
                 </p>
               </div>
             </div>

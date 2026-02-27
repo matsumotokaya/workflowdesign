@@ -2,13 +2,16 @@
 
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
+import { useLanguage } from "@/lib/language";
 
 export default function Hero() {
+  const { t, tx } = useLanguage();
+
   return (
     <section className="relative flex min-h-screen items-center justify-center px-6 pt-20 md:px-12">
       <div className="mx-auto max-w-[1400px] w-full">
         <div className="max-w-4xl">
-          {/* Name - Japanese */}
+          {/* Name - sub */}
           <div className="overflow-hidden mb-2">
             <motion.p
               className="text-[13px] tracking-[0.08em] text-muted uppercase"
@@ -65,7 +68,7 @@ export default function Hero() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              {profile.title.ja}
+              {t(profile.title)}
             </motion.p>
 
             <motion.p
@@ -78,7 +81,7 @@ export default function Hero() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              {profile.bio.ja}
+              {t(profile.bio)}
             </motion.p>
           </div>
         </div>
@@ -92,7 +95,7 @@ export default function Hero() {
         transition={{ delay: 1.4, duration: 0.6 }}
       >
         <span className="text-[11px] tracking-[0.1em] text-muted uppercase">
-          Scroll
+          {tx("scroll")}
         </span>
         <motion.div
           className="h-8 w-px bg-border"

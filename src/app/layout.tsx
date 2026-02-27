@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
+import { LanguageProvider } from "@/lib/language";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,11 +19,11 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "Kaya Matsumoto — Designer / Developer",
   description:
-    "松本夏弥 — デザイナー / フロントエンド開発。WORKFLOW DESIGN 代表。企業ブランディング、UI/UXデザイン、ウェブ開発。",
+    "Designer / Front-end Developer. Founder of WORKFLOW DESIGN. Corporate branding, UI/UX design, web development.",
   openGraph: {
     title: "Kaya Matsumoto — Designer / Developer",
     description:
-      "松本夏弥 — デザイナー / フロントエンド開発。WORKFLOW DESIGN 代表。",
+      "Designer / Front-end Developer. Founder of WORKFLOW DESIGN.",
     type: "website",
   },
 };
@@ -33,9 +34,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${notoSansJP.variable} antialiased`}>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

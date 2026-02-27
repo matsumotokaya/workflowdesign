@@ -4,13 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Project, projects } from "@/data/profile";
+import { useLanguage } from "@/lib/language";
 
 type Props = {
   project: Project;
 };
 
 export default function ProjectDetail({ project }: Props) {
-  // Find next project for navigation
+  const { lang, setLang, t, tx } = useLanguage();
+  const toggleLang = () => setLang(lang === "en" ? "ja" : "en");
+
   const currentIndex = projects.findIndex((p) => p.id === project.id);
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
@@ -25,27 +28,35 @@ export default function ProjectDetail({ project }: Props) {
           >
             Workflow Design
           </Link>
-          <Link
-            href="/#work"
-            className="flex items-center gap-2 text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              className="rotate-180"
+          <div className="flex items-center gap-6">
+            <button
+              onClick={toggleLang}
+              className="text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
             >
-              <path
-                d="M1 7h12M8 2l5 5-5 5"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Back
-          </Link>
+              {lang === "en" ? "JA" : "EN"}
+            </button>
+            <Link
+              href="/#work"
+              className="flex items-center gap-2 text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                className="rotate-180"
+              >
+                <path
+                  d="M1 7h12M8 2l5 5-5 5"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {tx("back")}
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -58,7 +69,7 @@ export default function ProjectDetail({ project }: Props) {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="mb-3 text-[12px] tracking-[0.1em] text-muted uppercase">
-              {project.category.ja}
+              {t(project.category)}
             </p>
           </motion.div>
 
@@ -72,7 +83,7 @@ export default function ProjectDetail({ project }: Props) {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            {project.title.ja}
+            {t(project.title)}
           </motion.h1>
 
           {/* Project Meta */}
@@ -89,7 +100,7 @@ export default function ProjectDetail({ project }: Props) {
             {project.client && (
               <div>
                 <p className="mb-1 text-[12px] tracking-[0.06em] text-muted uppercase">
-                  Client
+                  {tx("client")}
                 </p>
                 <p>{project.client}</p>
               </div>
@@ -97,23 +108,23 @@ export default function ProjectDetail({ project }: Props) {
             {project.role && (
               <div>
                 <p className="mb-1 text-[12px] tracking-[0.06em] text-muted uppercase">
-                  Role
+                  {tx("role")}
                 </p>
-                <p>{project.role.ja}</p>
+                <p>{t(project.role)}</p>
               </div>
             )}
             <div>
               <p className="mb-1 text-[12px] tracking-[0.06em] text-muted uppercase">
-                Year
+                {tx("year")}
               </p>
               <p>{project.year}</p>
             </div>
             <div className="md:col-span-1 lg:col-start-4">
               <p className="mb-1 text-[12px] tracking-[0.06em] text-muted uppercase">
-                Overview
+                {tx("overview")}
               </p>
               <p className="leading-[1.7] text-foreground/80">
-                {project.description.ja}
+                {t(project.description)}
               </p>
             </div>
           </motion.div>
@@ -123,31 +134,53 @@ export default function ProjectDetail({ project }: Props) {
       {/* Behance-style Image Stack */}
       <section className="pb-32 md:pb-40">
         <div className="mx-auto max-w-[1400px]">
-          {project.detailImages?.map((src, i) => (
-            <motion.div
-              key={i}
-              className="relative w-full"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.6,
-                delay: i === 0 ? 0.3 : 0,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <Image
-                src={src}
-                alt={`${project.title.ja} - ${i + 1}`}
-                width={1400}
-                height={900}
-                className="block w-full h-auto"
-                sizes="(max-width: 1400px) 100vw, 1400px"
-                quality={90}
-                priority={i < 3}
-              />
-            </motion.div>
-          ))}
+          {project.detailImages?.map((src, i) => {
+            const isVideo = src.endsWith(".mp4");
+            const isGif = src.endsWith(".gif");
+            return (
+              <motion.div
+                key={i}
+                className="relative w-full"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: i === 0 ? 0.3 : 0,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {isVideo ? (
+                  <video
+                    src={src}
+                    className="block w-full h-auto"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : isGif ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={src}
+                    alt={`${t(project.title)} - ${i + 1}`}
+                    className="block w-full h-auto"
+                  />
+                ) : (
+                  <Image
+                    src={src}
+                    alt={`${t(project.title)} - ${i + 1}`}
+                    width={1400}
+                    height={900}
+                    className="block w-full h-auto"
+                    sizes="(max-width: 1400px) 100vw, 1400px"
+                    quality={90}
+                    priority={i < 3}
+                  />
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
@@ -164,11 +197,11 @@ export default function ProjectDetail({ project }: Props) {
           >
             <div className="mx-auto max-w-[1400px]">
               <p className="mb-3 text-[12px] tracking-[0.1em] text-muted uppercase">
-                Next Project
+                {tx("nextProject")}
               </p>
               <div className="flex items-end justify-between gap-8">
                 <h2 className="text-[clamp(24px,4vw,48px)] font-light tracking-[-0.02em]">
-                  {nextProject.title.ja}
+                  {t(nextProject.title)}
                 </h2>
                 <svg
                   width="24"
@@ -204,7 +237,7 @@ export default function ProjectDetail({ project }: Props) {
             href="/#work"
             className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
           >
-            All Projects
+            {tx("allProjects")}
           </Link>
         </div>
       </footer>
