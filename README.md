@@ -31,7 +31,18 @@ Pentagram / Takram に代表される、**ミニマルだが上質な**クリエ
 | スタイリング | Tailwind CSS v4 |
 | アニメーション | Framer Motion |
 | ホスティング | Vercel |
+| ドメイン | workflowdesign.net |
+| レジストラ | お名前.com |
+| DNS | Cloudflare |
 | フォント | Google Fonts (Inter + Noto Sans JP) |
+
+## アクセス制限
+
+クライアントワーク保護のため、4桁PINによる簡易認証ゲートを実装。
+
+- 初回アクセス時にPIN入力モーダルを表示（暗いオーバーレイ + Framer Motionアニメーション）
+- 認証後は `localStorage` に保存し、再訪問時はスキップ
+- QRコード用URL: `https://workflowdesign.net/?p=2004` で直接アクセス可能
 
 ## 多言語対応（予定）
 

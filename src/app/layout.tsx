@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import { LanguageProvider } from "@/lib/language";
+import { PinGateProvider } from "@/lib/pin-gate";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,9 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${notoSansJP.variable} antialiased`}>
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        <PinGateProvider>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </PinGateProvider>
       </body>
     </html>
   );
