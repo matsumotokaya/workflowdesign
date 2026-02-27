@@ -3,12 +3,22 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { translations, TranslationKey } from "@/data/translations";
 
-export type Lang = "en" | "ja";
+export type Lang = "en" | "ja" | "zh-TW" | "zh-CN" | "ko";
+
+export const LANGS: Lang[] = ["en", "ja", "zh-TW", "zh-CN", "ko"];
+
+export const LANG_LABELS: Record<Lang, string> = {
+  en: "EN",
+  ja: "JA",
+  "zh-TW": "\u7E41\u4E2D",
+  "zh-CN": "\u7B80\u4E2D",
+  ko: "\uD55C",
+};
 
 type LanguageContextType = {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: (obj: { ja: string; en: string }) => string;
+  t: (obj: Record<string, string>) => string;
   tx: (key: TranslationKey) => string;
 };
 
@@ -20,7 +30,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("lang") as Lang | null;
-    if (saved === "ja" || saved === "en") {
+    if (saved && LANGS.includes(saved)) {
       setLangState(saved);
     }
     setMounted(true);
@@ -37,8 +47,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLangState(newLang);
   };
 
-  const t = (obj: { ja: string; en: string }) => obj[lang];
-  const tx = (key: TranslationKey) => translations[lang][key];
+  const t = (obj: Record<string, string>) => obj[lang] ?? obj["en"] ?? "";
+  const tx = (key: TranslationKey) => translations[lang]?.[key] ?? translations["en"][key];
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t, tx }}>

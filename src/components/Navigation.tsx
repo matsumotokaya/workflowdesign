@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "@/lib/language";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const navItems = [
   { label: "Work", href: "#work" },
@@ -11,13 +11,10 @@ const navItems = [
 ];
 
 export default function Navigation() {
-  const { lang, setLang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-
-  const toggleLang = () => setLang(lang === "en" ? "ja" : "en");
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
@@ -53,8 +50,8 @@ export default function Navigation() {
     <>
       {/* Main Nav Bar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-background/90 backdrop-blur-md" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+          isOpen ? "bg-transparent text-white" : isScrolled ? "bg-background/90 backdrop-blur-md" : "bg-transparent"
         } ${isHidden && !isOpen ? "-translate-y-full" : "translate-y-0"}`}
       >
         <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-6 md:px-12">
@@ -71,7 +68,7 @@ export default function Navigation() {
             Workflow Design
           </a>
 
-          {/* Desktop Nav Links + Lang Toggle */}
+          {/* Desktop Nav Links + Lang Switcher */}
           <div className="hidden items-center gap-12 md:flex">
             {navItems.map((item) => (
               <a
@@ -86,22 +83,12 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
-            <button
-              onClick={toggleLang}
-              className="text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
-            >
-              {lang === "en" ? "JA" : "EN"}
-            </button>
+            <LanguageSwitcher />
           </div>
 
-          {/* Mobile: Lang Toggle + Hamburger */}
+          {/* Mobile: Lang Switcher + Hamburger */}
           <div className="relative z-[60] flex items-center gap-4 md:hidden">
-            <button
-              onClick={toggleLang}
-              className="text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
-            >
-              {lang === "en" ? "JA" : "EN"}
-            </button>
+            <LanguageSwitcher />
             <button
               className="flex h-10 w-10 flex-col items-center justify-center gap-[7px]"
               onClick={() => setIsOpen(!isOpen)}
@@ -165,15 +152,25 @@ export default function Navigation() {
               ))}
             </nav>
 
-            {/* Overlay Footer */}
+            {/* Overlay Footer - Contact Info */}
             <motion.div
-              className="absolute bottom-12 left-6 right-6 flex justify-between text-[12px] text-white/50 tracking-[0.04em] md:left-12 md:right-12"
+              className="absolute bottom-10 left-6 right-6 md:left-12 md:right-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <span>hello@workflowdesign.net</span>
-              <span>@whatif.ep</span>
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div className="flex flex-col gap-1 text-[12px] tracking-[0.04em] text-white/40">
+                  <a href="mailto:matsumotokaya@gmail.com" className="transition-colors hover:text-white/70">
+                    matsumotokaya@gmail.com
+                  </a>
+                  <div className="flex gap-4">
+                    <a href="https://www.facebook.com/kaya.matsumoto" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white/70">Facebook</a>
+                    <a href="https://www.linkedin.com/in/kaya-matsumoto-8546481ab/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white/70">LinkedIn</a>
+                  </div>
+                </div>
+                <span className="text-[12px] tracking-[0.04em] text-white/40">Yokohama, Japan</span>
+              </div>
             </motion.div>
           </motion.div>
         )}

@@ -5,14 +5,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Project, projects } from "@/data/profile";
 import { useLanguage } from "@/lib/language";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 type Props = {
   project: Project;
 };
 
 export default function ProjectDetail({ project }: Props) {
-  const { lang, setLang, t, tx } = useLanguage();
-  const toggleLang = () => setLang(lang === "en" ? "ja" : "en");
+  const { t, tx } = useLanguage();
 
   const currentIndex = projects.findIndex((p) => p.id === project.id);
   const nextProject = projects[(currentIndex + 1) % projects.length];
@@ -29,12 +29,7 @@ export default function ProjectDetail({ project }: Props) {
             Workflow Design
           </Link>
           <div className="flex items-center gap-6">
-            <button
-              onClick={toggleLang}
-              className="text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
-            >
-              {lang === "en" ? "JA" : "EN"}
-            </button>
+            <LanguageSwitcher />
             <Link
               href="/#work"
               className="flex items-center gap-2 text-[13px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
@@ -231,14 +226,17 @@ export default function ProjectDetail({ project }: Props) {
             href="/"
             className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
           >
-            &copy; {new Date().getFullYear()} Workflow Design
+            &copy; Workflow Design
           </Link>
-          <Link
-            href="/#work"
-            className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
-          >
-            {tx("allProjects")}
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/#work"
+              className="text-[12px] tracking-[0.04em] text-muted transition-colors hover:text-foreground"
+            >
+              {tx("allProjects")}
+            </Link>
+            <LanguageSwitcher />
+          </div>
         </div>
       </footer>
     </div>
