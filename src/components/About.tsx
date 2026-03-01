@@ -9,10 +9,11 @@ export default function About() {
   const { t, tx } = useLanguage();
 
   const services = [
-    tx("serviceBrandStrategy"),
-    tx("serviceUiUx"),
-    tx("serviceWebDev"),
     tx("serviceArtDirection"),
+    tx("serviceBrandStrategy"),
+    tx("serviceWebDev"),
+    tx("serviceUiUx"),
+    tx("serviceUiDesign"),
     tx("serviceGraphicDesign"),
     tx("serviceGenerativeAi"),
   ];

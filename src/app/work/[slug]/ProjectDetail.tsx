@@ -97,7 +97,18 @@ export default function ProjectDetail({ project }: Props) {
                 <p className="mb-1 text-[12px] tracking-[0.06em] text-muted uppercase">
                   {tx("client")}
                 </p>
-                <p>{project.client}</p>
+                <div className="flex items-center gap-3">
+                  {project.clientLogo && (
+                    <Image
+                      src={project.clientLogo}
+                      alt={project.client}
+                      width={24}
+                      height={24}
+                      className="h-6 w-auto object-contain"
+                    />
+                  )}
+                  <p>{project.client}</p>
+                </div>
               </div>
             )}
             {project.role && (
