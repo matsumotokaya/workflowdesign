@@ -20,11 +20,11 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "Kaya Matsumoto — Designer / Developer",
   description:
-    "Designer / Front-end Developer. Founder of WORKFLOW DESIGN. Corporate branding, UI/UX design, web development.",
+    "Matsumoto Kaya — Designer, Web Developer, Art Director, UI Designer.",
   openGraph: {
     title: "Kaya Matsumoto — Designer / Developer",
     description:
-      "Designer / Front-end Developer. Founder of WORKFLOW DESIGN.",
+      "Matsumoto Kaya — Designer, Web Developer, Art Director, UI Designer.",
     type: "website",
   },
 };
