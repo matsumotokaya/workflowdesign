@@ -78,9 +78,15 @@ export const projects: Project[] = [
     year: "2026",
     client: "GLC Inc.",
     role: { ja: "\u30ED\u30B4\u30C7\u30B6\u30A4\u30F3 / \u30D6\u30E9\u30F3\u30C9\u30AC\u30A4\u30C9\u30E9\u30A4\u30F3", en: "Logo Design / Brand Guidelines", "zh-TW": "\u6A19\u8A8C\u8A2D\u8A08 / \u54C1\u724C\u898F\u7BC4", "zh-CN": "\u6807\u5FD7\u8BBE\u8BA1 / \u54C1\u724C\u89C4\u8303", ko: "\uB85C\uACE0 \uB514\uC790\uC778 / \uBE0C\uB79C\uB4DC \uAC00\uC774\uB4DC\uB77C\uC778" },
-    detailImages: Array.from({ length: 19 }, (_, i) =>
-      `/works/glc-branding/${String(i + 1).padStart(3, "0")}@3x-80.jpg`
-    ),
+    detailImages: [
+      "/works/glc-branding/bag_002_white.jpg",
+      "/works/glc-branding/bag_002.jpg",
+      "/works/glc-branding/GLC_KENSETSU_LOGO-USAGE-GUIDELINE_v1.jpg",
+      "/works/glc-branding/GLC_KENSETSU_LOGO-USAGE-GUIDELINE_v1_2.jpg",
+      ...Array.from({ length: 19 }, (_, i) =>
+        `/works/glc-branding/${String(i + 1).padStart(3, "0")}@3x-80.jpg`
+      ),
+    ],
   },
   {
     id: "wealthpark-branding",
@@ -254,10 +260,22 @@ export const projects: Project[] = [
     year: "2023",
     client: "WealthPark Inc.",
     role: { ja: "\u30D6\u30E9\u30F3\u30C7\u30A3\u30F3\u30B0 / \u30B7\u30F3\u30DC\u30EB\u30C7\u30B6\u30A4\u30F3", en: "Branding / Symbol Design", "zh-TW": "\u54C1\u724C\u8A2D\u8A08 / \u7B26\u865F\u8A2D\u8A08", "zh-CN": "\u54C1\u724C\u8BBE\u8BA1 / \u7B26\u53F7\u8BBE\u8BA1", ko: "\uBE0C\uB79C\uB529 / \uC2EC\uBCFC \uB514\uC790\uC778" },
-    detailImages: Array.from({ length: 11 }, (_, i) => {
-      const ext = i === 3 ? "png" : i === 5 ? "jpeg" : "jpg";
-      return `/works/wealthpark-lab/${String(i + 1).padStart(3, "0")}.${ext}`;
-    }),
+    detailImages: [
+      "/works/wealthpark-lab/003.jpg",
+      "/works/wealthpark-lab/001.jpg",
+      "/works/wealthpark-lab/002.jpg",
+      "/works/wealthpark-lab/005.jpg",
+      "/works/wealthpark-lab/006.jpeg",
+      "/works/wealthpark-lab/wealthpark_wpl_wp_grps2022-v1_ja_005.jpg",
+      "/works/wealthpark-lab/wealthpark_wpl_wp_grps2022-v1_en_004.jpg",
+      "/works/wealthpark-lab/wealthpark_wpl_wp_grps2022-v1_en_003.jpg",
+      "/works/wealthpark-lab/010.jpg",
+      "/works/wealthpark-lab/007.jpg",
+      "/works/wealthpark-lab/009.jpg",
+      "/works/wealthpark-lab/008.jpg",
+      "/works/wealthpark-lab/004.png",
+      "/works/wealthpark-lab/wp-lab_keyvisual_drawing.jpg",
+    ],
   },
 ];
 
